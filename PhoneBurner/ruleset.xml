@@ -198,4 +198,7 @@
     </rule>
 
     <rule ref="Generic.PHP.RequireStrictTypes"/>
+
+    <!-- Prohibit extra spaces around and semicolons -->
+    <rule ref="Squiz.Whitespace.SemicolonSpacing"/>
 </ruleset>
