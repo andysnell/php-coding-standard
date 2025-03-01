@@ -175,11 +175,12 @@
     <!-- Disallow Deprecated Implicitly Nullable Parameter Types (PHP 8.4)-->
     <!-- https://wiki.php.net/rfc/deprecate-implicitly-nullable-types -->
     <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
-    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat">
         <properties>
-            <!-- Allow both short and long nullable syntax -->
+            <property name="enable" value="yes"/>
+            <property name="withSpacesAroundOperators" value="no"/>
+            <property name="withSpacesInsideParentheses" value="no"/>
             <property name="shortNullable" value="no"/>
-            <property name="withSpaces" value="no"/>
             <property name="nullPosition" value="last"/>
         </properties>
     </rule>
