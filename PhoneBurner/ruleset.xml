@@ -215,8 +215,9 @@
     <!-- Enforces using short form of list syntax, [...] instead of list(...) -->
     <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
 
-    <!-- Class constants must declare a native type hint if able -->
+    <!-- Class constants must declare a native type hint if able (keep comments/annotations for PHPStan) -->
     <rule ref="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint">
         <exclude name="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint.UselessVarAnnotation"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint.UselessDocComment"/>
     </rule>
 </ruleset>
