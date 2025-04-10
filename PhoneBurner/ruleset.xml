@@ -6,30 +6,17 @@
 >
     <description>PhoneBurner Coding Standard</description>
 
-    <rule ref="PSR12">
-        <exclude name="PSR1.Files.SideEffects"/>
-        <exclude name="Generic.Files.LineLength"/>
-    </rule>
+    <!-- There's no standalone standard for PER-CS, so we include the PSR12 standard, -->
+    <!-- which also includes PSR1 and related sniffs, and add/configure individual -->
+    <!-- sniffs from other standards as needed. -->
+    <rule ref="PSR12"/>
 
     <!-- Conditionals must use "elseif" instead of "else if" -->
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration">
         <type>error</type>
     </rule>
 
-    <!-- Unit test methods should use snake_case instead of camelCase -->
-    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
-        <exclude-pattern>/tests/*</exclude-pattern>
-    </rule>
-
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
-
-    <!-- Zero spaces are required after the unary cast operators -->
-    <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
-
-    <!-- One space is required after the unary not (!) operator -->
-    <rule ref="Generic.Formatting.SpaceAfterNot"/>
-
-    <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
 
     <!-- The PHP_SAPI constant must be used instead of the php_sapi_name() method -->
     <rule ref="Generic.PHP.SAPIUsage"/>
@@ -37,7 +24,7 @@
     <!-- Use of the Backtick Operator (`) is Prohibited - Use \shell_exec() Instead -->
     <rule ref="Generic.PHP.BacktickOperator"/>
 
-    <!-- Require Trailing Commas in Multiline Arrays, Calls, and Declarations -->
+    <!-- PER-CS: Require Trailing Commas in Multiline Arrays, Calls, and Declarations -->
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
     <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse"/>
@@ -125,7 +112,6 @@
     </rule>
     <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration"/>
     <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature"/>
-    <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature"/>
     <rule ref="SlevomatCodingStandard.Classes.TraitUseDeclaration"/>
     <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
     <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
@@ -139,11 +125,26 @@
             <property name="searchAnnotations" value="true"/>
         </properties>
     </rule>
+
+    <!-- PHP optimizes some internal functions into special opcodes, but only if the function args are not unpacked. -->
     <rule ref="SlevomatCodingStandard.PHP.OptimizedFunctionsWithoutUnpacking"/>
 
     <!-- Enforces using shorthand cast operators, e.g. (int), forbids use of (unset) and (binary) cast operators -->
     <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
+
+    <!-- Prohibit useless semicolons and parentheses (unless in a complex ternary expression)-->
     <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses">
+        <properties>
+            <property name="ignoreComplexTernaryConditions" value="true"/>
+        </properties>
+    </rule>
+
+    <!-- Prohibit "Yoda Comparisons" like `null === $foo` for consistency -->
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+
+    <!-- Prohibit assignment in conditions (other than while loops)-->
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
 
     <!-- Prohibit Duplicate Whitespace -->
     <rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
@@ -192,14 +193,30 @@
         </properties>
     </rule>
 
+    <!-- Zero spaces are required after the unary cast operators -->
+    <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
+
+    <!-- One space is required after the unary not (!) operator -->
+    <rule ref="Generic.Formatting.SpaceAfterNot"/>
+
+    <rule ref="Generic.WhiteSpace.SpreadOperatorSpacingAfter"/>
     <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
         <properties>
             <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
 
+    <!-- All files must declare strict types -->
     <rule ref="Generic.PHP.RequireStrictTypes"/>
 
     <!-- Prohibit extra spaces around and semicolons -->
     <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+    <!-- Enforces using short form of list syntax, [...] instead of list(...) -->
+    <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
+
+    <!-- Class constants must declare a native type hint if able -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint">
+        <exclude name="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint.UselessVarAnnotation"/>
+    </rule>
 </ruleset>
