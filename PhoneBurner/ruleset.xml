@@ -9,7 +9,9 @@
     <!-- There's no standalone standard for PER-CS, so we include the PSR12 standard, -->
     <!-- which also includes PSR1 and related sniffs, and add/configure individual -->
     <!-- sniffs from other standards as needed. -->
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <exclude name="Generic.Files.LineLength.TooLong"/>
+    </rule>
 
     <!-- Conditionals must use "elseif" instead of "else if" -->
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration">
@@ -223,5 +225,10 @@
     <rule ref="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint">
         <exclude name="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint.UselessVarAnnotation"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint.UselessDocComment"/>
+    </rule>
+
+    <!-- Class properties must declare a native type. Promote the default warning to an error -->
+    <rule ref="PSR12.Properties.ConstantVisibility.NotFound">
+        <type>error</type>
     </rule>
 </ruleset>
